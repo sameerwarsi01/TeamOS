@@ -24,3 +24,7 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 .vscode/
+
+# AI Assistant Config
+opencode.json
+AGENTS.md

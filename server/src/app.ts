@@ -1,15 +1,26 @@
-import express  from "express";
-import { success } from "zod";
+import express from "express";
+import cookieParser from "cookie-parser";
+
+import authRoutes from "./modules/auth/auth.routes";
+import userRoutes from "./modules/users/user.routes";
 
 const app = express();
 
+// Middlewares
 app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// Health Check
 app.get("/api/health", (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: "TeamOS API is running",
-    });
+  res.status(200).json({
+    success: true,
+    message: "TeamOS API is running",
+  });
 });
+
+// API Routes
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/users", userRoutes);
 
 export default app;
