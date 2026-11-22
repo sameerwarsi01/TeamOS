@@ -16,6 +16,12 @@ import {
 
 import { authenticateUser } from "../../middleware/auth.middleware";
 
+import {
+  getWorkspaceMembersController,
+  updateWorkspaceMemberRoleController,
+  removeWorkspaceMemberController,
+} from "./member.controller";
+
 const router = Router();
 
 // All workspace routes require authentication
@@ -35,6 +41,22 @@ router.delete("/:workspaceId", deleteWorkspaceController);
 router.post(
   "/:workspaceId/invitations",
   createInvitationController
+);
+
+// Member routes
+router.get(
+  "/:workspaceId/members",
+  getWorkspaceMembersController
+);
+
+router.patch(
+  "/:workspaceId/members/:memberId/role",
+  updateWorkspaceMemberRoleController
+);
+
+router.delete(
+  "/:workspaceId/members/:memberId",
+  removeWorkspaceMemberController
 );
 
 export default router;
